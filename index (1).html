@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>فطومتي ❤️</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+background:linear-gradient(135deg,#ffd1e3,#fff);
+font-family:Tahoma;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+.card{
+width:95%;
+max-width:520px;
+min-height:70vh;
+background:white;
+padding:35px;
+border-radius:35px;
+text-align:center;
+box-shadow:0 0 35px #ff8bb8;
+}
+
+
+h1{
+color:#ff4f91;
+font-size:36px;
+}
+
+p{
+font-size:25px;
+line-height:1.8;
+color:#555;
+}
+
+
+button{
+width:85%;
+padding:18px;
+margin:10px;
+border:0;
+border-radius:35px;
+background:#ff5c9d;
+color:white;
+font-size:24px;
+}
+
+
+.hidden{
+display:none;
+}
+
+
+.envelope{
+font-size:100px;
+cursor:pointer;
+animation:shake 1.5s infinite;
+}
+
+
+@keyframes shake{
+
+25%{transform:rotate(-10deg);}
+75%{transform:rotate(10deg);}
+
+}
+
+
+.heart{
+font-size:90px;
+animation:pulse 1s infinite;
+}
+
+
+@keyframes pulse{
+
+50%{transform:scale(1.2);}
+
+}
+
+
+.lolo{
+font-size:100px;
+animation:bounce 1.5s infinite;
+}
+
+
+@keyframes bounce{
+
+50%{transform:translateY(-20px);}
+
+}
+
+
+.floating-heart{
+position:absolute;
+animation:up 5s linear infinite;
+}
+
+
+@keyframes up{
+
+from{transform:translateY(100vh);}
+to{transform:translateY(-120vh);}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="card">
+
+<div id="home">
+
+<div class="envelope" onclick="openMessage()">
+💌
+</div>
+
+<h1>إلى فطومتي ❤️</h1>
+
+<p>
+عندي لك رسالة من القلب...
+اضغطي على الظرف 💕
+</p>
+
+</div>
+<div id="message" class="hidden">
+
+<div class="lolo">
+🐱
+</div>
+
+<h1>
+فاطمة ❤️
+</h1>
+
+<p>
+لولو وصلت لك 🐾<br>
+عندي لك كم سؤال بسيط من عمر 💕
+</p>
+
+<button onclick="startQuiz()">
+نبدأ ✨
+</button>
+
+</div>
+
+
+
+<div id="quiz" class="hidden">
+
+<h1 id="question"></h1>
+
+<div id="answers"></div>
+
+</div>
+
+
+
+<div id="end" class="hidden">
+
+<div class="heart">
+❤️
+</div>
+
+<h1>
+فطومتي 💕
+</h1>
+
+<p>
+وتذكري دايمًا...<br><br>
+
+إن عمر بموووت فيك ويعشقك وااااايد ❤️♾️<br><br>
+
+أنتِ شيء جميل بحياتي ✨
+</p>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+function hideAll(){
+
+document.getElementById("home").classList.add("hidden");
+
+document.getElementById("message").classList.add("hidden");
+
+document.getElementById("quiz").classList.add("hidden");
+
+document.getElementById("end").classList.add("hidden");
+
+}
+
+
+function openMessage(){
+
+hideAll();
+
+document.getElementById("message").classList.remove("hidden");
+
+}
+let number = 0;
+
+
+let questions = [
+
+{
+text:"وش أكثر اسم تحبي تنادي عمر؟ ❤️",
+answers:[
+"عموري 🥹",
+"عمر ❤️",
+"عمور الغالي 💕"
+]
+},
+
+
+{
+text:"كم تحبين عمر؟ 😍",
+answers:[
+"وايد ❤️",
+"كثر النجوم ✨",
+"ماله نهاية ♾️"
+]
+},
+
+
+{
+text:"وش أحلى شيء في عمر؟ 🥰",
+answers:[
+"اهتمامه ❤️",
+"ضحكته 😊",
+"كل شيء فيه 💕"
+]
+}
+
+];
+
+
+
+function startQuiz(){
+
+hideAll();
+
+document.getElementById("quiz").classList.remove("hidden");
+
+showQuestion();
+
+}
+
+
+
+function showQuestion(){
+
+let q = questions[number];
+
+
+document.getElementById("question").innerHTML = q.text;
+
+
+let box = document.getElementById("answers");
+
+box.innerHTML = "";
+
+
+q.answers.forEach(function(answer){
+
+
+let btn = document.createElement("button");
+
+
+btn.innerHTML = answer;
+
+
+btn.onclick = function(){
+
+nextQuestion();
+
+};
+
+
+box.appendChild(btn);
+
+
+});
+
+
+}
+
+
+
+function nextQuestion(){
+
+number++;
+
+
+if(number < questions.length){
+
+showQuestion();
+
+}
+
+else{
+
+hideAll();
+
+document.getElementById("end").classList.remove("hidden");
+
+}
+
+}
+function createHearts(){
+
+for(let i=0;i<35;i++){
+
+let heart=document.createElement("div");
+
+heart.className="floating-heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+heart.style.animationDuration=(3+Math.random()*5)+"s";
+
+document.body.appendChild(heart);
+
+}
+
+}
+
+
+createHearts();
+
+
+</script>
+
+</body>
+</html>
